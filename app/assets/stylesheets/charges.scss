@@ -48,7 +48,7 @@
   text-align: center;
   float: right;
   overflow: auto;
-  margin-top: 4%;
+  margin-top: 0%;
 }
 
 .receipt-info-blue{
@@ -107,4 +107,10 @@
 
 .back-home a {
   color: white;
+}
+
+.status{
+  color: $odessuBlue;
+  margin-left: 27%;
+  font-size: 1.5em;
 }

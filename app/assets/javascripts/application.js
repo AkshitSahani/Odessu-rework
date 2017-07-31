@@ -291,14 +291,14 @@ $(document).ready(function() {
 
     var checks = $('.verify-black');
 
-    var interval = 5000;
+    var interval = 3000;
     for(i = 0; i < checks.length; i++ ) {
       (function(i){
         setInterval(function(){
           var check = checks[i];
           $(check).attr('src', '/assets/success.svg');
         }, interval)
-        interval += 5000;
+        interval += 3000;
       })(i);
     }
 

@@ -70,7 +70,7 @@
   float: right;
   width: 20%;
   position: absolute;
-  bottom: -42.5%;
+  bottom: -1%;
   right: 5%;
 }
 
@@ -78,10 +78,11 @@
   display: inline;
   width: 30%;
   margin-left: 44%;
+  text-align: center;
 }
 
-.cart-show-shipping input{
-  margin-left: 42%;
+.shipping-input2{
+  margin-left: 16.75% !important;
 }
 
 .cart-show-checkout{
@@ -93,6 +94,7 @@
   border-radius: 5px;
   width: 150px;
   height: 40px;
+  color: white;
 }
 
 .cart-show-checkout a{

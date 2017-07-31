@@ -1,11 +1,12 @@
 <div style="text-align: center;">RECEIPT</div>
 
-<div>Status: 
-  <% if current_user.orders.last.delivery_type == "Pickup" %>
-    <span>On Hold</span>
-  <% elsif current_user.orders.last.delivery_type == "Shipping" %>
-    <span>Shipping</span>
-</div>
+<br><div class="status">Status:
+  <% if current_user.orders.last.delivery_type == "pickup" %>
+    <span><em> On Hold </em></span>
+  <% elsif current_user.orders.last.delivery_type == "shipping" %>
+    <span><em> Shipping </em></span>
+  <% end %>
+</div><br>
 
 <div class="receipt-items-container">
   <% current_user.orders.last.order_items.each do |item| %>
@@ -20,7 +21,11 @@
 </div><br><br>
 
 <div class="receipt-info-container">
-  <span>FREE PICK UP</span><br><br>
+  <% if current_user.orders.last.delivery_type == 'shipping' %>
+    <span>DISCOUNTED PICK UP</span><br><br>
+  <% elsif current_user.orders.last.delivery_type == 'pickup' %>
+    <span>FREE PICK UP</span><br><br>
+  <% end %>
   <span class="receipt-info-blue">20 DUNDAS STREET WEST</span><br>
   <span>office location</span><br><br>
   <span>Monday - friday</span><br>
