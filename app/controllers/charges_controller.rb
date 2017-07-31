@@ -11,7 +11,7 @@ class ChargesController < ApplicationController
     @amount = current_order.subtotal.round(2)
     @tax = (@amount * 0.13).round(2)
     @charge = @amount + @tax
-
+    
     if current_user.stripe_customer_id
 
       charge = Stripe::Charge.create(
