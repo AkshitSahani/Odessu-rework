@@ -60,11 +60,11 @@ class Product < ApplicationRecord
 
   def get_product_desc
     final_desc = []
-    final_desc << self.description1 if (self.description1 != 'null' && self.description1 != nil)
-    final_desc << self.description2 if (self.description2 != 'null' && self.description2 != nil)
-    final_desc << self.description3 if (self.description3 != 'null' && self.description3 != nil)
-    final_desc << self.description4 if (self.description4 != 'null' && self.description4 != nil)
-    final_desc << self.description5 if (self.description5 != 'null' && self.description5 != nil)
+    final_desc << self.description1 if (self.description1 != 'null' && self.description1 != nil && self.description1 != '#NAME?')
+    final_desc << self.description2 if (self.description2 != 'null' && self.description2 != nil && self.description2 != '#NAME?')
+    final_desc << self.description3 if (self.description3 != 'null' && self.description3 != nil && self.description3 != '#NAME?')
+    final_desc << self.description4 if (self.description4 != 'null' && self.description4 != nil && self.description4 != '#NAME?')
+    final_desc << self.description5 if (self.description5 != 'null' && self.description5 != nil && self.description5 != '#NAME?')
     return final_desc.join(' ')
   end
 

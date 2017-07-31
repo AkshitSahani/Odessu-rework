@@ -68,13 +68,13 @@
   <%= fields_for :showoffs do |j| %>
 
     <div class="showoff">
-      <div class="showoff-option">BUST</div>
-      <div class="showoff-option">ARMS</div>
-      <div class="showoff-option">BACK</div>
-      <div class="showoff-option">STOMACH</div>
-      <div class="showoff-option">WAIST LINE</div>
-      <div class="showoff-option">BUTT</div>
-      <div class="showoff-option">LEGS</div>
+      <div class="showoff-option"><%= j.check_box :showoff, { multiple: true }, 'bust', nil %> BUST</div>
+      <div class="showoff-option"><%= j.check_box :showoff, { multiple: true }, 'arms', nil %> ARMS</div>
+      <div class="showoff-option"><%= j.check_box :showoff, { multiple: true }, 'back', nil %> BACK</div>
+      <div class="showoff-option"><%= j.check_box :showoff, { multiple: true }, 'stomach', nil %> STOMACH</div>
+      <div class="showoff-option"><%= j.check_box :showoff, { multiple: true }, 'waist line', nil %> WAIST LINE</div>
+      <div class="showoff-option"><%= j.check_box :showoff, { multiple: true }, 'butt', nil %> BUTT</div>
+      <div class="showoff-option"><%= j.check_box :showoff, { multiple: true }, 'legs', nil %> LEGS</div>
     </div>
   <% end %>
 

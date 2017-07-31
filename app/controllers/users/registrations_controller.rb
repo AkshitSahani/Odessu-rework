@@ -70,13 +70,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # params["insecurities"]["insecurity_top"].each do |ins|
     #   current_user.insecurities << Insecurity.create(insecurity_top: ins)
     # end
-
+    byebug
     params['issues']['issue_fit'].each do |issue_fit|
       current_user.issues << Issue.create(issue_fit: issue_fit)
     end
+
     params['issues']['issue_length'].each do |issue_length|
       current_user.issues << Issue.create(issue_length: issue_length)
     end
+
+    params['showoffs']['showoff'].each do |option|
+      current_user.showoffs << Showoff.create(showoff: option)
+    end
+
     redirect_to profile_4_path
   end
 
@@ -99,17 +105,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
     #
     # current_user.update_attributes(stripe_customer_id: customer.id)
 
-    # if ((current_user.height_ft != nil || current_user.height_cm != nil) && current_user.weight != nil)
-    #   predictions = User.calcFromHeightWeight(current_user)
-    # elsif (((current_user.height_ft != nil || current_user.height_cm != nil) && current_user.weight == nil) && current_user.tops_store != "Select a store" && current_user.tops_size != nil && current_user.bottoms_store != "Select a store" && current_user.bottoms_size != nil)
-    #   predictions = User.calcFromStoresAndSizes(current_user)
-    # elsif (((current_user.height_ft == nil && current_user.height_cm == nil) && current_user.weight != nil) && current_user.tops_store != "Select a store" && current_user.tops_size != nil && current_user.bottoms_store != "Select a store" && current_user.bottoms_size != nil)
-    #   predictions = User.calcFromStoresAndSizes(current_user)
-    # elsif (((current_user.height_ft == nil && current_user.height_cm == nil) && current_user.weight == nil) && current_user.tops_store != "Select a store" && current_user.tops_size != nil && current_user.bottoms_store != "Select a store" && current_user.bottoms_size != nil)
-    #   predictions = User.calcFromStoresAndSizes(current_user)
-    # end
-    #
-    # current_user.update_attributes(predicted_bust: predictions['true_bust'], predicted_waist: predictions['true_waist'], predicted_hip: predictions['true_hip'])
+    if ((current_user.height_ft != nil || current_user.height_cm != nil) && current_user.weight != nil)
+      predictions = User.calcFromHeightWeight(current_user)
+    elsif (((current_user.height_ft != nil || current_user.height_cm != nil) && current_user.weight == nil) && current_user.tops_store != "Select a store" && current_user.tops_size != nil && current_user.bottoms_store != "Select a store" && current_user.bottoms_size != nil)
+      predictions = User.calcFromStoresAndSizes(current_user)
+    elsif (((current_user.height_ft == nil && current_user.height_cm == nil) && current_user.weight != nil) && current_user.tops_store != "Select a store" && current_user.tops_size != nil && current_user.bottoms_store != "Select a store" && current_user.bottoms_size != nil)
+      predictions = User.calcFromStoresAndSizes(current_user)
+    elsif (((current_user.height_ft == nil && current_user.height_cm == nil) && current_user.weight == nil) && current_user.tops_store != "Select a store" && current_user.tops_size != nil && current_user.bottoms_store != "Select a store" && current_user.bottoms_size != nil)
+      predictions = User.calcFromStoresAndSizes(current_user)
+    end
+
+    current_user.update_attributes(predicted_bust: predictions['true_bust'], predicted_waist: predictions['true_waist'], predicted_hip: predictions['true_hip'])
 
     if current_user.update_attributes(sign_up_params)
       session[:user_signed_up?] = true
@@ -245,7 +251,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       :height_in, :height_cm, :weight,:bust, :hip, :waist, :account_type, :tops_store, :tops_size, :tops_store_fit,
       :bottoms_store, :bottoms_size,:bottoms_store_fit, :bra_size, :bra_cup, :body_shape, :tops_fit, :preference, :bottoms_fit,
       :birthdate, :advertisement_source, :weight_type, :stripe_customer_id, :predicted_hip, :predicted_bust, :predicted_waist,
-       :bust_waist_hip_inseam_type, :inseam, :predicted_inseam, :phone_number, :email_subscription, :terms_agreed?])
+       :bust_waist_hip_inseam_type, :inseam, :predicted_inseam, :phone_number, :email_subscription, :terms_agreed?, :city, :province, :postal_code, :buzzer_code])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -254,7 +260,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       :height_in, :height_cm, :weight,:bust, :hip, :waist, :account_type, :tops_store, :tops_size, :tops_store_fit,
       :bottoms_store, :bottoms_size,:bottoms_store_fit, :bra_size, :bra_cup, :body_shape, :tops_fit, :preference, :bottoms_fit,
       :birthdate, :advertisement_source, :weight_type, :stripe_customer_id, :predicted_hip, :predicted_bust, :predicted_waist,
-       :bust_waist_hip_inseam_type, :inseam, :predicted_inseam, :phone_number, :email_subscription, :terms_agreed?])
+       :bust_waist_hip_inseam_type, :inseam, :predicted_inseam, :phone_number, :email_subscription, :terms_agreed?, :city, :province, :postal_code, :buzzer_code])
   end
 
   # The path used after sign up.

@@ -237,7 +237,7 @@ $(document).ready(function() {
       }, 2000);
     });
 
-    $('.showoff-option').on('click', function(){
+    $('.showoff-option').on('change', function(){
       if($(this).attr('class').indexOf('showoff-clicked') !== -1){
         $(this).removeClass('showoff-clicked').css('background-color', 'white');
       }

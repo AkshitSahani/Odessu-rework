@@ -30,6 +30,6 @@ class IssueController < ApplicationController
   private
 
   def issue_params
-    params.require(:issue).permit(:issue_top, :issue_bottom, :user_id)
+    params.require(:issue).permit(:issue_fit, :issue_length, :user_id)
   end
 end
