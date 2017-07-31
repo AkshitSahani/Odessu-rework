@@ -18,12 +18,18 @@
     <%= render 'carts/cart_row', product: order_item.product, order_item: order_item, show_total: true %>
   <% end %>
 <% end %>
-<br><br>
+<br>
 <div style="overflow: hidden, position: relative;">
   <div class="cart-show-shipping">
-    <h5 style="display: inline;">FREE PICKUP</h5><br>
-    <%= check_box_tag '20 dundas St W', {}%> 20 Dundas St West<br>
-    <%= check_box_tag '5985 Rodeo Dr', {}%> 5985 Rodeo Drive
+    <h4> Delivery Type</h4><br>
+    <%= form_for current_order, url: update_delivery_type_path do |f| %>
+      <%= f.radio_button :delivery_type, "shipping" %> Shipping &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <%= f.radio_button :delivery_type, "pickup" %> Pickup<br><br><br>
+      <h5 style="display: inline;">FREE PICKUP</h5><br><br>
+      <%= f.radio_button :pickup_location, "20 Dundas St W"%> 20 Dundas St West<br>
+      <%= f.radio_button :pickup_location, "5985 Rodeo Dr", class: 'shipping-input2'%> 5985 Rodeo Drive
+      <%= f.submit 'Checkout', class: 'cart-show-checkout' %>
+      <% end %>
   </div>
 
   <div class="cart-show-totalamount">

@@ -84,6 +84,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     #code
   end
 
+
   def create_profile_4
     #for when the subscription model is live
     # customer = Stripe::Customer.create(
@@ -116,6 +117,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       render :profile_4
     end
+  end
+
+  def update_delivery_type
+    current_order.update_attributes(delivery_type: params['order']['delivery_type'])
+    current_order.update_attributes(pickup_location: params['order']['pickup_location'])
+    redirect_to new_charge_path
   end
 
   def update_terms_of_service
