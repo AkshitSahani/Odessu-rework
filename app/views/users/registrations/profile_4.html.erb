@@ -20,7 +20,7 @@
 
       <%= f.text_field :city, placeholder: "City" %><br><br>
 
-      <%= f.text_field :province, placeholder: "Province" %><br><br>
+      <%= f.select :province, ['Alberta', 'British Columbia', 'Manitoba', 'New Brunswick', 'Newfoundland and Labrador', 'Northwest Territories', 'Nova Scotia', 'Nunavut', 'Ontario', 'Prince Edward Island', 'Quebec', 'Saskatchewan', 'Yukon Territory'], :prompt => "Select A Province" %><br><br>
 
       <%= f.text_field :postal_code, placeholder: "Postal Code" %><br><br>
 

@@ -58,4 +58,14 @@ class Product < ApplicationRecord
     %Q{<iframe title="YouTube video player" width="450" height="300" src="http://www.youtube.com/embed/#{ youtube_id }" frameborder="0" allowfullscreen></iframe>}
   end
 
+  def get_product_desc
+    final_desc = []
+    final_desc << self.description1 if (self.description1 != 'null' && self.description1 != nil)
+    final_desc << self.description2 if (self.description2 != 'null' && self.description2 != nil)
+    final_desc << self.description3 if (self.description3 != 'null' && self.description3 != nil)
+    final_desc << self.description4 if (self.description4 != 'null' && self.description4 != nil)
+    final_desc << self.description5 if (self.description5 != 'null' && self.description5 != nil)
+    return final_desc.join(' ')
+  end
+
 end

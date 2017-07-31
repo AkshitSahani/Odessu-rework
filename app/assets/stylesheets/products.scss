@@ -21,6 +21,7 @@
 }
 
 .prod-container{
+  position: relative;
   display: inline-block;
   width: 49%;
   color: black;
@@ -69,4 +70,49 @@
 
 .prod-show-desc{
   width: 66%;
+}
+
+.prod-show-right select{
+  width: 25%;
+  border-color: $odessuBlue;
+}
+
+.prod-show-qty{
+  border: 1px solid $odessuBlue;
+  border-radius: 5px;
+  width: 25%;
+  margin-left: 10%;
+}
+
+.index-add-to-cart{
+  position: absolute;
+  bottom: 19.5%;
+  left: 12%;
+  height: 200px;
+  width: 350px;
+  opacity: 0;
+  background-color: white;
+}
+
+.prod-container:hover{
+  .index-add-to-cart{
+    opacity: 0.4;
+  }
+
+  #index-button{
+    opacity: 1;
+  }
+}
+
+#index-button{
+  position: absolute;
+  bottom: 35%;
+  left: 33%;
+  width: 150px;
+  height: 40px;
+  border: 1px solid $odessuBlue;
+  border-radius: 5px;
+  background-color: $odessuBlue;
+  color: white;
+  opacity: 0;
 }

@@ -312,15 +312,15 @@ $(document).ready(function() {
     }, 15000)
 
     $("#overlay").on("click",function(event){
-		  $('iframe').css('opacity', 1);
-      var iframeSrc = $('iframe').attr('src');
+		  $('.vid-container iframe').css('opacity', 1);
+      var iframeSrc = $('.vid-container iframe').attr('src');
       var playIframeSrc = iframeSrc + "?autoplay=1";
-      $('iframe').attr('src', playIframeSrc);
+      $('.vid-container iframe').attr('src', playIframeSrc);
       event.preventDefault();
 		  $("#overlay").css("z-index",-1);
     });
 
-    $("iframe").on("mouseleave",function(){
+    $(".vid-container iframe").on("mouseleave",function(){
     	$("#overlay").css("z-index",1);
     });
 
