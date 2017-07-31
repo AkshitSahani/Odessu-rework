@@ -28,7 +28,7 @@
 
   <h3>Tops</h3>
   <%= f.label :tops_store, "Store" %>
-  <%= f.select :tops_store, ['', 'Addition Elle', 'Leo'] %>
+  <%= f.select :tops_store, @stores %>
 
   <%= f.label :tops_size, "Size" %>
   <%= f.text_field :tops_size %>
@@ -41,7 +41,7 @@
   <h3>Bottoms</h3>
 
   <%= f.label :bottoms_store, "Store" %>
-  <%= f.select :bottoms_store, ['', 'Addition Elle', 'Leo'] %>
+  <%= f.select :bottoms_store, @stores %>
 
   <%= f.label :bottoms_fit, "Size" %>
   <%= f.text_field :bottoms_fit %>
@@ -84,7 +84,7 @@
 
   <h1>Profile 3</h1>
   <h3> What issues do you usually have with your clothing? </h3>
-  <%# @issues.each do |issue| %>
+  
   <span class="second_form"><%= form_tag update_issues_path, method: :put , id: 'form1' do %>
 
     <h4> top </h4>

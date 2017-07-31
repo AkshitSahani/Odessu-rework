@@ -70,7 +70,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # params["insecurities"]["insecurity_top"].each do |ins|
     #   current_user.insecurities << Insecurity.create(insecurity_top: ins)
     # end
-    byebug
     params['issues']['issue_fit'].each do |issue_fit|
       current_user.issues << Issue.create(issue_fit: issue_fit)
     end
@@ -102,22 +101,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
     #   :customer => customer.id,
     #   :plan => "What We Offer",
     # )
-    #
+
     # current_user.update_attributes(stripe_customer_id: customer.id)
 
-    if ((current_user.height_ft != nil || current_user.height_cm != nil) && current_user.weight != nil)
-      predictions = User.calcFromHeightWeight(current_user)
-    elsif (((current_user.height_ft != nil || current_user.height_cm != nil) && current_user.weight == nil) && current_user.tops_store != "Select a store" && current_user.tops_size != nil && current_user.bottoms_store != "Select a store" && current_user.bottoms_size != nil)
-      predictions = User.calcFromStoresAndSizes(current_user)
-    elsif (((current_user.height_ft == nil && current_user.height_cm == nil) && current_user.weight != nil) && current_user.tops_store != "Select a store" && current_user.tops_size != nil && current_user.bottoms_store != "Select a store" && current_user.bottoms_size != nil)
-      predictions = User.calcFromStoresAndSizes(current_user)
-    elsif (((current_user.height_ft == nil && current_user.height_cm == nil) && current_user.weight == nil) && current_user.tops_store != "Select a store" && current_user.tops_size != nil && current_user.bottoms_store != "Select a store" && current_user.bottoms_size != nil)
-      predictions = User.calcFromStoresAndSizes(current_user)
-    end
-
-    current_user.update_attributes(predicted_bust: predictions['true_bust'], predicted_waist: predictions['true_waist'], predicted_hip: predictions['true_hip'])
-
     if current_user.update_attributes(sign_up_params)
+      if ((current_user.height_ft != nil || current_user.height_cm != nil) && current_user.weight != nil)
+        predictions = User.calcFromHeightWeight(current_user)
+      elsif (((current_user.height_ft != nil || current_user.height_cm != nil) && current_user.weight == nil) && current_user.tops_store != "Select a store" && current_user.tops_size != nil && current_user.bottoms_store != "Select a store" && current_user.bottoms_size != nil)
+        predictions = User.calcFromStoresAndSizes(current_user)
+      elsif (((current_user.height_ft == nil && current_user.height_cm == nil) && current_user.weight != nil) && current_user.tops_store != "Select a store" && current_user.tops_size != nil && current_user.bottoms_store != "Select a store" && current_user.bottoms_size != nil)
+        predictions = User.calcFromStoresAndSizes(current_user)
+      elsif (((current_user.height_ft == nil && current_user.height_cm == nil) && current_user.weight == nil) && current_user.tops_store != "Select a store" && current_user.tops_size != nil && current_user.bottoms_store != "Select a store" && current_user.bottoms_size != nil)
+        predictions = User.calcFromStoresAndSizes(current_user)
+      end
+
+      current_user.update_attributes(predicted_bust: predictions[:true_bust], predicted_waist: predictions[:true_waist], predicted_hip: predictions[:true_hip])
+
       session[:user_signed_up?] = true
       redirect_to products_path
     else
@@ -181,8 +180,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def edit_profile
     @issues_top = current_user.issues.where(issue_bottom: nil)
     @issues_bottom = current_user.issues.where(issue_top: nil)
-    @insecurities_top = current_user.insecurities.where(insecurity_bottom: nil)
-    @insecurities_bottom= current_user.insecurities.where(insecurity_top: nil)
+    @showoffs = current_user.showoffs
+    @stores = (["Select a store"] << Store.all.distinct.order(:store_name).pluck(:store_name)).flatten
   end
 
   def update_profile
