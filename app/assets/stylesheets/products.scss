@@ -1,0 +1,72 @@
+// Place all the styles related to the Products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "colorRules";
+
+.top-logo-container{
+  margin-top: 3%;
+}
+
+.filters-container{
+  display: inline;
+  width: 60%;
+  text-align: center;
+  margin-left: 14%;
+}
+
+.index{
+  text-align: center;
+  width: 80%;
+  margin-left: 10%;
+}
+
+.prod-container{
+  display: inline-block;
+  width: 49%;
+  color: black;
+}
+
+.prod-show-left, .prod-show-right{
+  display: inline-block;
+  width: 49%;
+  text-align: center;
+}
+
+.prod-show-right{
+  position: absolute;
+  top: 15%;
+  left: 49%;
+  text-align: left;
+  margin-left: 7%;
+}
+
+.prod-show-right span{
+  margin-left: 10%;
+}
+
+.prod-show-left span {
+  font-size: 4em;
+  float: left;
+  margin-left: 3%;
+}
+
+.prod-show-left a {
+  color: black;
+}
+
+.prod-show-left a:hover{
+  text-decoration: none;
+}
+
+.prod-show-container{
+  margin-top: 1%;
+  position: relative;
+}
+
+.prod-show-right h3{
+  display: inline-block;
+}
+
+.prod-show-desc{
+  width: 66%;
+}

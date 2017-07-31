@@ -1,0 +1,63 @@
+<div class="logotop">
+  <%= image_tag "odessu_logo.jpg", height: 60, width: 60 %> <b>ODESSU</b>
+</div>
+
+<div class="prof4-intro">
+  Almost done. We just need your profile info.
+</div>
+
+<hr>
+
+<div class="prof4-content-container">
+  <div class="shipping-info">
+  <h4>Shipping Information</h4>
+    <%= form_for current_user, url: create_profile_4_path do |f| %>
+      <%# f.label :full_name, 'Full Name' %>
+      <%= f.text_field :full_name, placeholder: "Full Name" %><br><br>
+
+      <%# f.label :address, 'Address' %>
+      <%= f.text_field :address, placeholder: "Address" %><br><br>
+
+      <%= f.text_field :city, placeholder: "City" %><br><br>
+
+      <%= f.text_field :province, placeholder: "Province" %><br><br>
+
+      <%= f.text_field :postal_code, placeholder: "Postal Code" %><br><br>
+
+      <%= f.text_field :buzzer_code, placeholder: "Buzzer Code" %><br><br>
+
+      <%# f.label :phone_number, 'Phone Number' %>
+      <%= f.text_field :phone_number, placeholder: "Phone number" %><br><br>
+
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+      data-description="Odessu Shopping Service"
+      data-amount="1200"
+      data-locale="auto">
+      </script><br><br>
+
+
+
+  </div>
+
+  <div class="prof4-disclaimer">
+    Your information will not be publicly shared <br>
+    Your credit card is Protected by Stripe <br>
+    You will only be called or messaged by phone for shipping delivery <br>
+    <%= form_tag update_terms_of_service_path, method: :patch do %>
+    <%= check_box_tag :email_subscription, true%> Odessu can send you emails for special deals and events <br>
+    <%= check_box_tag :terms_agreed?, true%> I agree to the <span class="tof"> Terms of Service </span>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <% end %>
+  </div>
+</div>
+
+<div class="prof4-submit-container"><%= f.submit "Discover", class:'prof4-submit' %></div>
+<% end %>
+
+<div class="prof-setup-progress-prof-4">
+  <%= image_tag "success.svg", height: 50, width: 50 %>
+  <%= image_tag "success.svg", height: 50, width: 50 %>
+  <%= image_tag "success.svg", height: 50, width: 50%>
+  <%= image_tag "success.svg", height: 50, width: 50 %>
+</div>

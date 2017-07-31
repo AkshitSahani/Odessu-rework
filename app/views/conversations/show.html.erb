@@ -1,0 +1,22 @@
+<h1>Chatting with <%= @conversation.with(current_user).full_name %></h1>
+
+<div id="conversation-main">
+  <div id="conversation-body" data-conversation-id="<%= @conversation.id %>">
+    <% if current_user.id == 1 %>
+      <%= render @conversation.messages.last(50) %>
+    <% else %>
+      <%= render @conversation.messages.last(2) %>
+    <% end %>
+    <!-- remember you changed this to show only two messages in the convo -->
+  </div>
+
+  <%= form_for @message do |f| %>
+    <%= hidden_field_tag 'conversation_id', @conversation.id %>
+    <%= hidden_field_tag 'message_receiver_id', @conversation.with(current_user).id %>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+<div class="sendmessage">
+    <%= f.submit 'Send message' %>
+</div>
+  <% end %>
+</div>

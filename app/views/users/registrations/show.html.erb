@@ -1,0 +1,13 @@
+<h3>Welcome <%= @user.full_name%></h3>
+<% @bmi_results.each do |key, value| %>
+  <em><b><%= key %>: <%= value %></b></em><br><br>
+<% end %>
+<% @shape_guess_data.each do |key, value| %>
+  <em><b><%= key %>: <%= value %></b></em><br><br>
+<% end %>
+
+<%= User.calcFromHeightWeight(current_user) %>
+<%= User.calcFromStoresAndSizes(current_user) %>
+
+<%= link_to "Edit my account", edit_user_registration_path %>
+<%= link_to "Edit my profile", edit_profile_path %>

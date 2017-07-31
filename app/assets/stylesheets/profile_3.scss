@@ -1,0 +1,107 @@
+@import 'colorRules';
+
+.prof3-intro{
+  text-align: center;
+  color: red;
+  font-size: 1.3em;
+}
+
+.cloth-fit h3{
+  text-align: center;
+  margin-top: 3%;
+  margin-bottom: 2%;
+}
+
+.fitt {
+  display: inline-block;
+  width: 30%;
+  margin: 0 4%;
+  height: 4em;
+}
+
+.fitt div{
+  display: inline;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.select-that-apply{
+  text-align: center;
+  margin: 3% 4%;
+}
+
+.cloth-fit{
+  text-align: center;
+}
+
+.issues{
+  margin-top: 3%;
+  text-align: center;
+  width: 88%;
+  margin-left: 6%;
+}
+
+.prof-3-issue{
+  display: inline-block;
+  border: 1px solid $odessuBlue;
+  background-color: salmon;
+  border-radius: 5px;
+  margin: -2px;
+  padding: 2px 4px;
+  font-size: 1em;
+  width: 35%;
+}
+
+.issue{
+  display: inline-block;
+  width: 40%;
+  margin: 0%;
+  height: 4em;
+}
+
+.other-issues{
+  text-align: center;
+  margin-left: 38%;
+}
+
+.other-issues input {
+  border: none;
+  border-bottom: 1px solid black;
+  width: 250px;
+}
+
+.other-issues input:last-child{
+  margin-left: 41.5%;
+}
+
+.showoff{
+  text-align: center;
+  width: 84%;
+  margin-left: 8%;
+  margin-right: 8%;
+  line-height: 4em;
+}
+
+.showoff-option{
+  display: inline-block;
+  width: 15%;
+  margin: 2% 5%;
+  border: 1px solid red;
+  border-radius: 4px;
+}
+
+.prof3-submit{
+  text-align: center;
+  // border: 1px solid $odessuBlue;
+  // padding: 1% 5%;
+  color: white;
+  background-color: $odessuBlue;
+  border-radius: 5px;
+  height: 40px;
+  width: 150px;
+}
+
+.issue-submit-container{
+  text-align: center;
+  margin: 2% 0%;
+}

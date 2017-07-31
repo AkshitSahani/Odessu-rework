@@ -1,0 +1,110 @@
+// Place all the styles related to the charges controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'colorRules';
+
+.checkout-verification-hr{
+  border-width: 1em;
+}
+
+.verify-black{
+  margin: 0 7%;
+}
+
+.getting-verified{
+  color: red;
+}
+
+.wait-message{
+  color: $odessuBlue;
+}
+
+.checkout-verification-container > span:first-of-type{
+  float: left;
+  margin-left: 24%;
+}
+
+.checkout-verification-container > span:last-of-type{
+  float: right;
+  margin-right: 24.5%;
+}
+
+.receipt-items-container{
+  display: inline;
+  width: 65%;
+  float: left;
+  clear: both;
+  overflow: auto;
+  border-top: 2px solid red;
+  padding-bottom: 3%;
+  padding-top: 3%;
+  border-bottom: 2px solid red;
+  margin-bottom: 5%;
+}
+
+.receipt-info-container{
+  display: inline;
+  width: 20%;
+  text-align: center;
+  float: right;
+  overflow: auto;
+  margin-top: 4%;
+}
+
+.receipt-info-blue{
+  color: $odessuBlue;
+}
+
+.charge-labels-container{
+  width: 25%;
+  margin: auto;
+}
+
+.receipt-item{
+  // margin-bottom: 6%;
+  position: relative;
+}
+
+.receipt-size{
+  position: absolute;
+  top: 40%;
+  left: 54%;
+  color: $odessuBlue;
+}
+
+.receipt-color{
+  position: absolute;
+  top: 40%;
+  left: 28%;
+  color: $odessuBlue;
+}
+
+.receipt-price{
+  position: absolute;
+  top: 0%;
+  left: 580%;
+  color: $odessuBlue;
+}
+
+.receipt-color-value, .receipt-size-value, .receipt-price-value{
+  margin-left: 45%;
+  color: black
+}
+
+.receipt-itemname{
+  position: absolute;
+  top: 15%;
+  left: 26%;
+}
+
+.back-home{
+  float: right;
+  background-color: $odessuBlue;
+  width: 150px;
+  height: 50px;
+  border-radius: 5px;
+}
+
+.back-home a {
+  color: white;
+}

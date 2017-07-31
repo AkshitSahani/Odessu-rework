@@ -1,0 +1,32 @@
+
+<div class="cart-div">
+
+  <div class=""><br><br>
+    <div class="">
+      <%= image_tag product.picture_src, height: 200, width: 150 %>
+      <h3 class="cart-show-prodname"><%= product.name.upcase %></h3>
+    </div>
+    <div class="">
+      <%= form_for order_item, remote: true do |f| %>
+        <div class="cart-show-pricerow"> <h4 style="display: inline;"> <span class="price-heading">Price </span> </h4> <br> <span class="price-value"><%= number_to_currency order_item.unit_price %></span></div>
+        <div class="cart-show-colorrow"> <h4 style="display: inline;"> <span class="color-heading">Color </span> </h4> <br> <span class="color-value"><%= order_item.color %></span></div>
+        <div class="cart-show-sizerow"> <h4 style="display: inline;"> <span class="size-heading"> Size </span> </h4> <br> <span class="size-value"><%= order_item.size %></span></div>
+        <div class="cart-show-quantityrow">
+          <h4 style="display: inline;" class="quantity-heading">Quantity </h4><br><%= f.number_field :quantity, value: order_item.quantity.to_i, class: "quantity-value", min: 1 %>
+          <%= f.hidden_field :product_id, value: product.id %>
+          <%= f.hidden_field :order_item_id, value: order_item.id %>
+        </div>
+        <span class="remove-item"><%= link_to "X", order_item, { data: { confirm: "Are you sure you wish to delete the product '#{order_item.product.name}' from your cart?" }, method: :delete, remote: true } %></span>
+          <div class="">
+          <div class="col-xs-8 text-right">
+            <div class="btn-group">
+              <%# f.submit "Update Quantity", class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+        <h4 class="text-right">Total Price: <span style="color: green" class="cart-show-totalprice"><%= number_to_currency order_item.total_price %></span></h4>
+      <% end %>
+    </div>
+
+  </div>
+</div>
