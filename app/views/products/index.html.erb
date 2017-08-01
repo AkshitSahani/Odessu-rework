@@ -12,6 +12,7 @@
   <div class="index">
     <% @products.each do |product| %>
       <%= link_to product_path(product) do %>
+      <div><%= product.get_predicted_storesize(current_user) %></div>
         <div class="prod-container">
           <div class="index-add-to-cart"></div>
           <button onclick="window.location.href='/products/'+'<%= product.id %>'" id="index-button">Add to Cart</button>
