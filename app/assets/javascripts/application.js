@@ -354,5 +354,14 @@ $(document).ready(function() {
 
     })
 
+  $('.mybodyshape').on('click', function(){
+
+    if($(this).attr('class').indexOf('active') !== -1){
+      $(this).css('color', 'black').removeClass('active');
+    }
+    else if ($(this).attr('class').indexOf('active') === -1){
+      $(this).css('color', 'red').addClass('active');
+    }
+  })
 
   })

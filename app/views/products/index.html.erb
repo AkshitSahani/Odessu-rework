@@ -1,3 +1,4 @@
+<div class="contain">
 <div class="filters-container">
   <h4 class="filter">DRESSES</h4>
   <h4 class="filter">TOPS</h4>
@@ -8,6 +9,14 @@
   <h4 class="filter">SALES</h4>
 </div>
 <hr style="border-color: black; border-width: thin;">
+
+<div class="index-filters">
+  <span>CUSTOMIZATIONS</span><br><span style="font-size:0.8em; margin-left:14%;">(click to enable)</span><br><br>
+  <span style="color: red;">My Size</span><br>
+  <ul>
+    <li class="mybodyshape">My Body Shape </li>
+  </ul>
+</div>
 <div class="row">
   <div class="index">
     <% @products.each do |product| %>
@@ -24,7 +33,7 @@
     <% end %>
   </div>
 </div>
-
+</div>
 <% if current_user %>
   <% if current_user.id == 1 %>
     <%= link_to "my conversations", conversations_path %>
