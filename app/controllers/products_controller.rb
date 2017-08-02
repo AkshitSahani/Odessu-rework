@@ -17,6 +17,16 @@ class ProductsController < ApplicationController
     else
       @conversation = Conversation.between(current_user.id, 1)[0]
     end
+
+    if request.xhr?
+      @product = Product.find(params['product_id'])
+      @product_sizes = @product.get_product_sizes
+      @predicted_storesize = @product.get_predicted_storesize(current_user)
+      respond_to do |format|
+        format.html
+        format.json { render json: {sizes: @product_sizes, prediction: @predicted_storesize} }
+      end
+    end
   end
 
   def landing_page

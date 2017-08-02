@@ -73,9 +73,11 @@ class Product < ApplicationRecord
     predicted_waist = user.predicted_waist
     predicted_bust = user.predicted_bust
 
-    results_bust = Store.where(store_name: "VOLUPTUOUS", feature: 'BUST')
-    results_waist = Store.where(store_name: "VOLUPTUOUS", feature: 'WAIST')
-    results_hip = Store.where(store_name: "VOLUPTUOUS", feature: 'HIP')
+    #all of the products for now are from voluptuous. Every time you import a new CSV file for a new store whose products you're
+    #listing, make associations that each of the new product.store = any instance of that store from the stores table.
+    results_bust = Store.where(store_name: self.store.store_name, feature: 'BUST')
+    results_waist = Store.where(store_name: self.store.store_name, feature: 'WAIST')
+    results_hip = Store.where(store_name: self.store.store_name, feature: 'HIP')
 
     results_hash = {}
 
@@ -97,19 +99,51 @@ class Product < ApplicationRecord
       end
     end
 
-    if self.dresses != nil
-      #split by or and then by / and compare the numbers for each and select largest size.
+    #for now the code for splitting the sizes to compare and decide which is bigger is only catered to the sizing format of
+    #voluptuous. This needs to be modified in the future to be able to correctly do that for any store and sizing format.
+    if results_hash[:hip] == results_hash[:waist] && results_hash[:hip] == results_hash[:bust] && results_hash[:bust] == results_hash[:waist]
+      results_hash[:predicted_storesize] = results_hash[:hip]
+      return results_hash[:predicted_storesize]
+    else
+      bust_split = results_hash[:bust].gsub(/\s+/, "").split('or')[1].split('/')[1]
+      waist_split = results_hash[:waist].gsub(/\s+/, "").split('or')[1].split('/')[1]
+      hip_split = results_hash[:hip].gsub(/\s+/, "").split('or')[1].split('/')[1]
+
+      if self.dresses != nil
+        max_size = [bust_split.to_i, waist_split.to_i, hip_split.to_i].max
+
+        [results_hash[:bust], results_hash[:waist], results_hash[:hip]].each do |size|
+          results_hash[:predicted_storesize] = size if size.include?(max_size.to_s)
+        end
+        return results_hash[:predicted_storesize]
+      end
+
+      if self.tops != nil
+        if results_hash[:bust] == results_hash[:waist]
+          results_hash[:predicted_storesize] = results_hash[:waist]
+        else
+          max_size = [bust_split.to_i, waist_split.to_i].max
+          [results_hash[:bust], results_hash[:waist]].each do |size|
+            results_hash[:predicted_storesize] = size if size.include?(max_size.to_s)
+          end
+        end
+        return results_hash[:predicted_storesize]
+      end
+
+      if self.bottoms != nil
+        if results_hash[:hip] == results_hash[:waist]
+          results_hash[:predicted_storesize] = results_hash[:waist]
+        else
+          max_size = [hip_split.to_i, waist_split.to_i].max
+          [results_hash[:hip], results_hash[:waist]].each do |size|
+            results_hash[:predicted_storesize] = size if size.include?(max_size.to_s)
+          end
+        end
+        return results_hash[:predicted_storesize]
+      end
+
     end
 
-    if self.tops != nil
-      #split by or and then by / and compare the numbers for bust and waist and select largest size.
-    end
 
-    if self.bottoms != nil
-      #split by or and then by / and compare the numbers for waist and hip and select largest size.
-    end
-
-    return results_hash
   end
-
 end

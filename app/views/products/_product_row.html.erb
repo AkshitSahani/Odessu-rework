@@ -13,11 +13,13 @@
       <span class="priceafter"><%= product.priceafter %></span><br><br>
       <div class="prod-show-desc"> <%= product.get_product_desc %></div><br>
         <h4> Color</h4>
-        <span class="prod-show-color"><%= f.select :color, product.get_product_colors%></span>
+        <span class="prod-show-color"><%= f.select :color, product.get_product_colors %></span>
         <h4>Sizes</h4>
-        <span class="prod-show-sizes"><%= f.select :size, product.get_product_sizes %></span>
+        <% product.get_product_sizes.each do |size| %>
+          <span class="prod-show-sizes"><%= f.radio_button :size, "#{size}", class: 'prod-show-size' %> <%= size %></span>
+        <% end %>
         <br><div>
-          <h4>Quantity </h4><%= f.number_field :quantity, value: 1, min: 1, class: 'prod-show-qty'%><br><br>
+          <h4 class="prod-show-qty-heading">Quantity </h4><%= f.number_field :quantity, value: 1, min: 1, class: 'prod-show-qty'%><br><br>
           <div style="margin-left: 20%">
             <%= f.hidden_field :product_id, value: product.id %>
             <%= f.hidden_field :itemcode, value: product.itemcode %>
