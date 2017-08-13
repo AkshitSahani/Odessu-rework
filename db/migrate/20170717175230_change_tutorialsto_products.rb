@@ -1,6 +1,6 @@
 class ChangeTutorialstoProducts < ActiveRecord::Migration[5.0]
   def change
-    drop_table :tutorials
+    # drop_table :tutorials
     drop_table :products
     create_table :products do |t|
       t.string :tops
