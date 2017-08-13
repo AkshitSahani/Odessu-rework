@@ -2,7 +2,7 @@ $(document).ready( function() {
 
   // let messages_to_bottom = () => messages.scrollTop(messages.prop("scrollHeight"));
 
-  function messages_to_bottom() {
+  messages_to_bottom: function() {
     messages.scrollTop(messages.prop("scrollHeight"));
   }
 
