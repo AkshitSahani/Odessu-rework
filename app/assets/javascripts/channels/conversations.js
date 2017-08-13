@@ -1,24 +1,26 @@
-$(document).ready( function() {
+$(document).ready(function() {
 
-  // let messages_to_bottom = () => messages.scrollTop(messages.prop("scrollHeight"));
+  var messages, messages_to_bottom;
 
-  messages_to_bottom: function() {
-    messages.scrollTop(messages.prop("scrollHeight"));
-  }
+  messages = $('#conversation-body');
 
-  var messages = $('#conversation-body');
+  messages_to_bottom = function() {
+    return messages.scrollTop(messages.prop("scrollHeight"));
+  };
+
+
 
   if ($('#current-user').size() > 0) {
     App.personal_chat = App.cable.subscriptions.create({
       channel: "NotificationsChannel"
     }, {
-    connected() {},
+    connected: function() {},
       // Called when the subscription is ready for use on the server
 
-    disconnected() {},
+    disconnected: function() {},
       // Called when the subscription has been terminated by the server
 
-    received(data) {
+    received: function(data) {
 
       if (data['message_receiver_id'] !== 1) {
         if ($('.messager').size() > 0) {
@@ -49,7 +51,7 @@ $(document).ready( function() {
         }
       }
 
-      if ((messages.size() > 0) && (messages.data('conversation-id') === data['conversation_id'])) {
+      if (messages.size() > 0 && messages.data('conversation-id') === data['conversation_id']) {
         messages.append(data['message']);
          return messages_to_bottom();
       }
@@ -65,11 +67,10 @@ $(document).ready( function() {
       }
     },
 
-    send_message(message, conversation_id, message_receiver_id) {
-      return this.perform('send_message', {message, conversation_id, message_receiver_id});
+    send_message: function(message, conversation_id, message_receiver_id) {
+      return this.perform('send_message', {message: message, conversation_id: conversation_id, message_receiver_id: message_receiver_id});
     }
-  }
-    );
+  });
   }
 
   $(document).on('click', '#notification .close', function() {
@@ -96,8 +97,7 @@ $(document).ready( function() {
     var itemLink = $(this).siblings('#order_item_item_link').val();
     var userId = $(this).siblings('#order_item_user_id').val();
     var message = "item code: " + itemCode + " | " + "item link:" + itemLink + " | " + "user id: " + userId;
-    console.log(message);
-    console.log(convId);
+
     App.personal_chat.send_message(message, convId, 1);
   })
 });

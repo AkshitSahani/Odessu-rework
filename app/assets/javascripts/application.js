@@ -324,35 +324,38 @@ $(document).ready(function() {
     	$("#overlay").css("z-index",1);
     });
 
-    var productId = parseInt($('#order_item_product_id').val());
-    $.ajax({
-      url: '/products/' + productId,
-      method: 'get',
-      data: {
-        product_id: productId
-      },
-      dataType: 'json'
-    }).done(function(data){
-      var j = 0;
-      for (i=0; i < data['sizes'].length; i++){
-        j++
-        if(data['prediction'].indexOf(data['sizes'][i]) != -1){
-          for (k=0; k < $('.prod-show-size').size(); k++){
-            var element = $('.prod-show-size')[k];
-            if($(element).attr('value') === data['sizes'][i]){
-              $(value).parent().css('color', 'red');
-              return
+    if($('#order_item_product_id').size() !== 0){
+      var productId = parseInt($('#order_item_product_id').val());
+      $.ajax({
+        url: '/products/' + productId,
+        method: 'get',
+        data: {
+          product_id: productId
+        },
+        dataType: 'json'
+      }).done(function(data){
+        var j = 0;
+        for (i=0; i < data['sizes'].length; i++){
+          j++
+          if(data['prediction'].indexOf(data['sizes'][i]) != -1){
+            for (k=0; k < $('.prod-show-size').size(); k++){
+              var element = $('.prod-show-size')[k];
+              if($(element).attr('value') === data['sizes'][i]){
+                $(value).parent().css('color', 'red');
+                return
+              }
             }
           }
         }
-      }
 
-      if (j === data['sizes'].length){
-        var sorry = $("<span>").html('<br>Sorry, your predicted size is not available in stock.<br><br>').css('color', 'red');
-        $('.prod-show-qty-heading').prepend(sorry);
-      }
+        if (j === data['sizes'].length){
+          var sorry = $("<span>").html('<br>Sorry, your predicted size is not available in stock.<br><br>').css('color', 'red');
+          $('.prod-show-qty-heading').prepend(sorry);
+        }
 
-    })
+      })
+    }
+
 
   $('.mybodyshape').on('click', function(){
 
