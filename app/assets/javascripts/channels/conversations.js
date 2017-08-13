@@ -1,6 +1,11 @@
 $(document).ready( function() {
 
-  let messages_to_bottom = () => messages.scrollTop(messages.prop("scrollHeight"));
+  // let messages_to_bottom = () => messages.scrollTop(messages.prop("scrollHeight"));
+
+  function messages_to_bottom() {
+    messages.scrollTop(messages.prop("scrollHeight"));
+  }
+
   var messages = $('#conversation-body');
 
   if ($('#current-user').size() > 0) {
@@ -74,8 +79,8 @@ $(document).ready( function() {
   if (messages.length > 0) {
     messages_to_bottom();
     return $('#new_message').submit(function(e) {
-      let $this = $(this);
-      let textarea = $this.find('#message_body');
+      var $this = $(this);
+      var textarea = $this.find('#message_body');
       if ($.trim(textarea.val()).length > 0) {
         App.personal_chat.send_message(textarea.val(), $this.find('#conversation_id').val(), $this.find('#message_receiver_id').val());
         textarea.val('');
