@@ -5,7 +5,7 @@ class Product < ApplicationRecord
 
   def self.get_csv_data
     require 'csv'
-    csv_text = File.read('/Users/AkshitSahani/Desktop/bitmaker/projects/odessu/app/assets/voluptuousverified.csv', :encoding => 'ISO-8859-1')
+    csv_text = File.read('app/assets/images/voluptuousverified.csv', :encoding => 'ISO-8859-1')
     csv = CSV.parse(csv_text, :headers => true)
 
     csv.each do |row|
