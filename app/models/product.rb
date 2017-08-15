@@ -75,9 +75,9 @@ class Product < ApplicationRecord
 
     #all of the products for now are from voluptuous. Every time you import a new CSV file for a new store whose products you're
     #listing, make associations that each of the new product.store = any instance of that store from the stores table.
-    results_bust = Store.where(store_name: self.store.store_name, feature: 'BUST')
-    results_waist = Store.where(store_name: self.store.store_name, feature: 'WAIST')
-    results_hip = Store.where(store_name: self.store.store_name, feature: 'HIP')
+    results_bust = Store.where(store_name: "VOLUPTUOUS", feature: 'BUST') #once the association is made, you can call self.store.store_name instead of hardcoding the store name
+    results_waist = Store.where(store_name: "VOLUPTUOUS", feature: 'WAIST')
+    results_hip = Store.where(store_name: "VOLUPTUOUS", feature: 'HIP')
 
     results_hash = {}
 
@@ -104,10 +104,12 @@ class Product < ApplicationRecord
     if results_hash[:hip] == results_hash[:waist] && results_hash[:hip] == results_hash[:bust] && results_hash[:bust] == results_hash[:waist]
       results_hash[:predicted_storesize] = results_hash[:hip]
       return results_hash[:predicted_storesize]
+
     else
       bust_split = results_hash[:bust].gsub(/\s+/, "").split('or')[1].split('/')[1]
       waist_split = results_hash[:waist].gsub(/\s+/, "").split('or')[1].split('/')[1]
       hip_split = results_hash[:hip].gsub(/\s+/, "").split('or')[1].split('/')[1]
+
 
       if self.dresses != nil
         max_size = [bust_split.to_i, waist_split.to_i, hip_split.to_i].max

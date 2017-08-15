@@ -281,10 +281,10 @@ $(document).ready(function() {
         },
         dataType: 'json'
       }).done(function(data){
-        console.log(data);
+        // console.log(data);
         var totalPrice = data['total_price'];
-        console.log(totalPrice);
-        console.log($this.attr('class'));
+        // console.log(totalPrice);
+        // console.log($this.attr('class'));
         $($this).parent().siblings('.text-right').children('.cart-show-totalprice').empty();
         $($this).parent().siblings('.text-right').children('.cart-show-totalprice').text(totalPrice);
       })
@@ -308,11 +308,11 @@ $(document).ready(function() {
     setTimeout(function(){
       $('.wait-message').empty();
       $('.wait-message').text('Everything is perfect!')
-    }, 15000)
+    }, 9000)
 
     setTimeout(function(){
       $('.stripe-button-container').show();
-    }, 15000)
+    }, 9000)
 
     $("#overlay").on("click",function(event){
 		  $('.vid-container iframe').css('opacity', 1);
@@ -344,7 +344,7 @@ $(document).ready(function() {
             for (k=0; k < $('.prod-show-size').size(); k++){
               var element = $('.prod-show-size')[k];
               if($(element).attr('value') === data['sizes'][i]){
-                $(value).parent().css('color', 'red');
+                $(element).parent().css('color', 'red');
                 return
               }
             }
