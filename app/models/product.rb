@@ -81,21 +81,27 @@ class Product < ApplicationRecord
 
     results_hash = {}
 
-    results_bust.each do |result|
-      if predicted_bust <= result.size_max.to_f && predicted_bust >= result.size_min.to_f
-        results_hash[:bust] = result.store_size
+    if predicted_bust
+      results_bust.each do |result|
+        if predicted_bust <= result.size_max.to_f && predicted_bust >= result.size_min.to_f
+          results_hash[:bust] = result.store_size
+        end
       end
     end
 
-    results_waist.each do |result|
-      if predicted_waist <= result.size_max.to_f && predicted_waist >= result.size_min.to_f
-        results_hash[:waist] = result.store_size
+    if predicted_waist
+      results_waist.each do |result|
+        if predicted_waist <= result.size_max.to_f && predicted_waist >= result.size_min.to_f
+          results_hash[:waist] = result.store_size
+        end
       end
     end
 
-    results_hip.each do |result|
-      if predicted_hip <= result.size_max.to_f && predicted_hip >= result.size_min.to_f
-         results_hash[:hip] = result.store_size
+    if predicted_hip
+      results_hip.each do |result|
+        if predicted_hip <= result.size_max.to_f && predicted_hip >= result.size_min.to_f
+           results_hash[:hip] = result.store_size
+        end
       end
     end
 
