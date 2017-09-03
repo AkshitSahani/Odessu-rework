@@ -16,8 +16,13 @@
         <span class="prod-show-color"><%= f.select :color, product.get_product_colors %></span>
         <h4>Sizes</h4>
         <% product.get_product_sizes.each do |size| %>
-          <span class="prod-show-sizes"><%= f.radio_button :size, "#{size}", :checked => product.get_predicted_storesize(current_user).split("or")[0].strip == size ? true : nil, class: 'prod-show-size' %> <%= size %></span>
+          <% if product.get_predicted_storesize(current_user) != " " %>
+            <span class="prod-show-sizes"><%= f.radio_button :size, "#{size}", :checked => product.get_predicted_storesize(current_user).split("or")[0].strip == size ? true : nil, class: 'prod-show-size' %> <%= size %></span>
+          <% else %>
+            <span class="prod-show-sizes"><%= f.radio_button :size, "#{size}", class: 'prod-show-size' %> <%= size %></span>
+          <% end %>
         <% end %>
+
         <br>
         <div>
           <h4 class="prod-show-qty-heading">Quantity </h4><%= f.number_field :quantity, value: 1, min: 1, class: 'prod-show-qty'%><br><br>

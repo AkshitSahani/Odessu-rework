@@ -97,9 +97,11 @@ $(document).ready(function() {
         var url = 'http://localhost:3000/products/' + productId;
         var link = $('<a>').attr('href', url);
         var filterResultContainer = $("<div>").addClass('prod-container');
+        var addToCart = $('<div>').addClass('index-add-to-cart');
+        var indexButton = $('<button>').attr('onclick', "window.location.href='/products/'" + productId).attr('id', 'index-button').text('Add to Cart');
         var imgSrc = data[i]['picture_src']
         var resultImage = $("<img>").attr('src', imgSrc).attr('height', "500").attr('width', "350").addClass('prod-img');
-        filterResultContainer.append(resultImage).append($('<br>')).append($('<br>'));
+        filterResultContainer.append(addToCart).append(indexButton).append(resultImage).append($('<br>')).append($('<br>'));
         filterResultContainer.append(data[i]["name"].toUpperCase() + " by Voluptuous").append($('<br>'));
         filterResultContainer.append($("<span>").addClass('price-before').html(data[i]["pricebefore"]));
         filterResultContainer.append('&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;').append(data[i]["priceafter"]).append($('<br>')).append($('<br>')).append($('<br>')).append($('<br>'));
@@ -372,6 +374,11 @@ $(document).ready(function() {
 
   $('.sendmessage').on('click', function(){
     location.reload();
+  })
+
+  $('.prod-container').on('hover', function(){
+    $('.index-add-to-cart').css('opacity', '0.4');
+    $('#index-button').css('opacity', '1');
   })
 
   })

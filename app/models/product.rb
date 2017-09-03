@@ -112,44 +112,48 @@ class Product < ApplicationRecord
       return results_hash[:predicted_storesize]
 
     else
-      bust_split = results_hash[:bust].gsub(/\s+/, "").split('or')[1].split('/')[1]
-      waist_split = results_hash[:waist].gsub(/\s+/, "").split('or')[1].split('/')[1]
-      hip_split = results_hash[:hip].gsub(/\s+/, "").split('or')[1].split('/')[1]
+      if results_hash[:bust] && results_hash[:waist] && results_hash[:hip]
+        bust_split = results_hash[:bust].gsub(/\s+/, "").split('or')[1].split('/')[1]
+        waist_split = results_hash[:waist].gsub(/\s+/, "").split('or')[1].split('/')[1]
+        hip_split = results_hash[:hip].gsub(/\s+/, "").split('or')[1].split('/')[1]
 
 
-      if self.dresses != nil
-        max_size = [bust_split.to_i, waist_split.to_i, hip_split.to_i].max
+        if self.dresses != nil
+          max_size = [bust_split.to_i, waist_split.to_i, hip_split.to_i].max
 
-        [results_hash[:bust], results_hash[:waist], results_hash[:hip]].each do |size|
-          results_hash[:predicted_storesize] = size if size.include?(max_size.to_s)
-        end
-        return results_hash[:predicted_storesize]
-      end
-
-      if self.tops != nil
-        if results_hash[:bust] == results_hash[:waist]
-          results_hash[:predicted_storesize] = results_hash[:waist]
-        else
-          max_size = [bust_split.to_i, waist_split.to_i].max
-          [results_hash[:bust], results_hash[:waist]].each do |size|
+          [results_hash[:bust], results_hash[:waist], results_hash[:hip]].each do |size|
             results_hash[:predicted_storesize] = size if size.include?(max_size.to_s)
           end
+          return results_hash[:predicted_storesize]
         end
-        return results_hash[:predicted_storesize]
-      end
 
-      if self.bottoms != nil
-        if results_hash[:hip] == results_hash[:waist]
-          results_hash[:predicted_storesize] = results_hash[:waist]
-        else
-          max_size = [hip_split.to_i, waist_split.to_i].max
-          [results_hash[:hip], results_hash[:waist]].each do |size|
-            results_hash[:predicted_storesize] = size if size.include?(max_size.to_s)
+        if self.tops != nil
+          if results_hash[:bust] == results_hash[:waist]
+            results_hash[:predicted_storesize] = results_hash[:waist]
+          else
+            max_size = [bust_split.to_i, waist_split.to_i].max
+            [results_hash[:bust], results_hash[:waist]].each do |size|
+              results_hash[:predicted_storesize] = size if size.include?(max_size.to_s)
+            end
           end
+          return results_hash[:predicted_storesize]
         end
+
+        if self.bottoms != nil
+          if results_hash[:hip] == results_hash[:waist]
+            results_hash[:predicted_storesize] = results_hash[:waist]
+          else
+            max_size = [hip_split.to_i, waist_split.to_i].max
+            [results_hash[:hip], results_hash[:waist]].each do |size|
+              results_hash[:predicted_storesize] = size if size.include?(max_size.to_s)
+            end
+          end
+          return results_hash[:predicted_storesize]
+        end
+      else
+        results_hash[:predicted_storesize] = " "
         return results_hash[:predicted_storesize]
       end
-
     end
   end
 
