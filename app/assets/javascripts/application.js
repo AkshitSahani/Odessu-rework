@@ -370,4 +370,8 @@ $(document).ready(function() {
     }
   })
 
+  $('.sendmessage').on('click', function(){
+    location.reload();
+  })
+
   })
