@@ -146,7 +146,7 @@ $(document).ready(function() {
     })
 
 
-    $('body').delegate('.close-chat', 'click', function(){
+    $('body').delegate('.close-chat, .chat-heading', 'click', function(){
       $('.messager').animate({right:"-1000px"}).removeClass('visible');
     })
 

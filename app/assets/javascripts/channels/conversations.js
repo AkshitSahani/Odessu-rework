@@ -24,11 +24,12 @@ $(document).ready(function() {
         if ($('.messager').size() > 0) {
           $('#conversation-body').append(data["message"]);
           $('#conversation-body').scrollTop($('#conversation-body').prop("scrollHeight"));
+          $('.messager').show().animate({right:"1%"}).addClass('visible');
         }
         else {
-          var messager = $('<div>').addClass('messager').html(' &nbsp; Chat ');
+          var messager = $('<div>').addClass('messager').html('<span class="chat-heading"> &nbsp; Chat </span>');
           $(messager).append($('<span>').addClass('close-chat').text(' X').css('float', 'right').css('margin-right', '4%'));
-          $(messager).append($('<span>').addClass('chat-content'));
+          $(messager).append($('<div>').addClass('chat-content').css('margin', '0% 3%'));
           $('body').append(messager);
 
           $.ajax({
@@ -45,7 +46,7 @@ $(document).ready(function() {
             $('#conversation-body').scrollTop($('#conversation-body').prop("scrollHeight"));
           })
           $('.messager-insert').html(messager);
-          $(messager).show().animate({right:"0px"}).addClass('visible');
+          $(messager).show().animate({right:"1%"}).addClass('visible');
         }
       }
 

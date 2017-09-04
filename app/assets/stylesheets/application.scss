@@ -63,13 +63,13 @@ h4.filter{
 }
 
 .messager {
-    width:25%;
+    width:18%;
     z-index:2;
     position:absolute;
     right:-1000px;
     bottom: 0px;
-    background:$odessuBlue;
-    color:$odessuPink;
+    background:grey;
+    color:$odessuBlue;
     display: none;
 }
 
