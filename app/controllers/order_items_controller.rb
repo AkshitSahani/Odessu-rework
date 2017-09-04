@@ -15,6 +15,19 @@ class OrderItemsController < ApplicationController
       session[:order_id] = @order.id
     end
 
+    def show
+      if request.xhr?
+        @order = current_order
+        @order_item = @order.order_items.find(params['order_item_id'])
+        if params.has_key?('order_item_size')
+          @order_item.update_attributes(size: params['order_item_size'])
+        elsif params.has_key?("order_item_color")
+          @order_item.update_attributes(color: params['order_item_color'])
+        end
+        @order_items = @order.order_items
+      end
+    end
+
     def update
       if request.xhr?
         @order = current_order
