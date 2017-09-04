@@ -74,19 +74,14 @@ class User < ApplicationRecord
      results_hash = {bust_waist_ratio: bustWaistRatio, hip_waist_ratio: hipWaistRatio, body_category: bodyCategory}
 
      if((diffInterBustWaist <= 3) && (diffInterHipWaist <= 3) && (diffInterBustHip <= 3))
-       #puts "<h4>Rectangle</h4>"
        results_hash[:body_shape] = "Rectangle"
      elsif((waistRatio > bustWaistRatio) && (waistRatio > hipWaistRatio))
-       #puts "<h4>Oval</h4>"
        results_hash[:body_shape] = "Oval"
      elsif ((waistRatio < bustWaistRatio) && (waistRatio < hipWaistRatio))
-       #puts "<h4>Hourglass</h4>"
        results_hash[:body_shape] = "Hourglass"
      elsif ((waistRatio < bustWaistRatio) && (waistRatio > hipWaistRatio))
-       #puts "<h4>Inverted Triangle</h4>"
        results_hash[:body_shape] = "Inverted Triangle"
      elsif ((waistRatio > bustWaistRatio) && (waistRatio < hipWaistRatio))
-       #puts "<h4>Triangle</h4>"
        results_hash[:body_shape] = "Triangle"
      end
      return results_hash
@@ -104,31 +99,162 @@ class User < ApplicationRecord
     elsif user.weight_type == "Kg"
       getWeight = ((user.weight.to_f) * 2.20462)
     end
-    # getBraBust = user.bust #(bra size)
 
-    if (getHeight >= 48) && (getHeight <=59)
-      predictedBust = 40
-      predictedWaist = 46
-      predictedHip = 50
-      predictedInseam = 0
-
-    elsif (getHeight >= 60) && (getHeight <=71)
-      predictedBust = 40
-      predictedWaist = 46
-      predictedHip = 50
-      predictedInseam = 0
-
-    elsif (getHeight >= 72) && (getHeight <=80)
-      predictedBust = 40
-      predictedWaist = 46
-      predictedHip = 50
-      predictedInseam = 0
+    if ((getHeight >= 48) && (getHeight <= 59))
+        predictedFromHWBust = (39.8264 + (getHeight * (-0.302730)) + (getWeight * 0.120800))
+        predictedFromHWWaist = (35.8677 + (getHeight * (-0.384542)) + (getWeight * 0.138296))
+        predictedFromHWHip = (33.4821 + (getHeight * (-0.166397)) + (getWeight * 0.118986))
+        predictedFromHWInseam = (-7.39781 + (getHeight * 0.602135)) + (getWeight * (-0.0133127))
+    elsif ((getHeight >= 60) && (getHeight <=71))
+        predictedFromHWBust = (39.8602 + (getHeight * (-0.303865)) + (getWeight * 0.120917))
+        predictedFromHWWaist = (60.0865 + (getHeight * (-0.763514)) + (getWeight * 0.141982))
+        predictedFromHWHip = (33.3585 + (getHeight * (-0.162360)) + (getWeight * 0.118724))
+        predictedFromHWInseam = (-7.85941 + (getHeight * 0.608293)) + (getWeight * (-0.0128906))
+    elsif ((getHeight >= 72) && (getHeight <=80))
+        predictedFromHWBust = (39.7441 + (getHeight * (-0.302251)) + (getWeight * 0.120945))
+        predictedFromHWWaist = (39.4437 + (getHeight * (-0.446287)) + (getWeight * 0.139020))
+        predictedFromHWHip = (33.0163 + (getHeight * (-0.160000)) + (getWeight * 0.119220))
+        predictedFromHWInseam = (-10.1759 + (getHeight * 0.636287)) + (getWeight * (-0.0117900))
     end
 
     results_hash = {}
-    results_hash[:true_bust] = predictedBust
-    results_hash[:true_waist] = predictedWaist
-    results_hash[:true_hip] = predictedHip
+    results_hash[:true_bust] = predictedFromHWBust
+    results_hash[:true_waist] = predictedFromHWWaist
+    results_hash[:true_hip] = predictedFromHWHip
+    results_hash[:true_inseam] = predictedFromHWInseam
+
+    return results_hash
+  end
+
+  def self.calcFromHeightWeightBra(user) #priority 2
+    getBraBust = user.bra_size.to_f + (['AA', 'A', 'B', 'C', 'D', 'DD or E', 'DDD or F', 'G', 'H', 'I', 'J'].find_index(user.bra_cup))
+
+    if user.height_cm
+      getHeight = (user.height_cm.to_f) * 0.393701
+    elsif user.height_ft
+      getHeight = (user.height_ft.to_f * 12) + user.height_in.to_f
+    end
+
+    if user.weight_type == "Lbs"
+      getWeight = user.weight.to_f
+    elsif user.weight_type == "Kg"
+      getWeight = ((user.weight.to_f) * 2.20462)
+    end
+
+    if ((getHeight >= 48) && (getHeight <= 59))
+        predictedFromHWBust = (39.8264 + (getHeight * (-0.302730)) + (getWeight * 0.120800))
+        predictedFromHWWaist = (35.8677 + (getHeight * (-0.384542)) + (getWeight * 0.138296))
+        predictedFromHWHip = (33.4821 + (getHeight * (-0.166397)) + (getWeight * 0.118986))
+        predictedFromHWInseam = (-7.39781 + (getHeight * 0.602135)) + (getWeight * (-0.0133127))
+    elsif ((getHeight >= 60) && (getHeight <=71))
+        predictedFromHWBust = (39.8602 + (getHeight * (-0.303865)) + (getWeight * 0.120917))
+        predictedFromHWWaist = (60.0865 + (getHeight * (-0.763514)) + (getWeight * 0.141982))
+        predictedFromHWHip = (33.3585 + (getHeight * (-0.162360)) + (getWeight * 0.118724))
+        predictedFromHWInseam = (-7.85941 + (getHeight * 0.608293)) + (getWeight * (-0.0128906))
+    elsif ((getHeight >= 72) && (getHeight <=80))
+        predictedFromHWBust = (39.7441 + (getHeight * (-0.302251)) + (getWeight * 0.120945))
+        predictedFromHWWaist = (39.4437 + (getHeight * (-0.446287)) + (getWeight * 0.139020))
+        predictedFromHWHip = (33.0163 + (getHeight * (-0.160000)) + (getWeight * 0.119220))
+        predictedFromHWInseam = (-10.1759 + (getHeight * 0.636287)) + (getWeight * (-0.0117900))
+    end
+
+    constant = 0
+    coefficient = 0
+
+    #Set Coefficient and Constant
+    if((getWeight >= 140) && (getWeight < 150))
+        constant = -2.75
+        coefficient = 0.880769
+    elsif((getWeight >= 150) && (getWeight < 160))
+        constant = -2.36061
+        coefficient = 0.879545
+    elsif((getWeight >= 160) && (getWeight < 170))
+        constant = -2.04394
+        coefficient = 0.879545
+    elsif((getWeight >= 170) && (getWeight < 180))
+        constant = -1.67552
+        coefficient = 0.878671
+    elsif((getWeight >= 180) && (getWeight < 190))
+        constant = -1.39953
+        coefficient = 0.88007
+    elsif((getWeight >= 190) && (getWeight < 200))
+        constant = -1.06212
+        coefficient = 0.879545
+    elsif((getWeight >= 200) && (getWeight < 210))
+        constant = -0.721212
+        coefficient = 0.879545
+    elsif((getWeight >= 210) && (getWeight < 220))
+        constant = -7.38083
+        coefficient = 1.04605
+    elsif((getWeight >= 220) && (getWeight < 230))
+        constant = 0.00198135
+        coefficient = 0.877972
+    elsif((getWeight >= 230) && (getWeight < 240))
+        constant = 0.259907
+        coefficient = 0.88007
+    elsif((getWeight >= 240) && (getWeight < 250))
+        constant = 0.559907
+        coefficient = 0.88007
+    elsif((getWeight >= 250) && (getWeight < 260))
+        constant = 0.98951
+        coefficient = 0.878147
+    elsif((getWeight >= 260) && (getWeight < 270))
+        constant = 1.18077
+        coefficient = 0.880769
+    elsif((getWeight >= 270) && (getWeight < 280))
+        constant = 1.53963
+        coefficient = 0.88007
+    elsif((getWeight >= 280) && (getWeight < 290))
+        constant = 1.97692
+        coefficient = 0.878147
+    elsif((getWeight >= 290) && (getWeight < 300))
+        constant = 2.15769
+        coefficient = 0.880769
+    elsif((getWeight >= 300) && (getWeight < 310))
+        constant = 2.55758
+        coefficient = 0.879545
+    elsif((getWeight >= 310) && (getWeight < 320))
+        constant = 2.85268
+        coefficient = 0.88007
+    elsif((getWeight >= 320) && (getWeight < 330))
+        constant = 3.25641
+        coefficient = 0.878846
+    elsif((getWeight >= 330) && (getWeight < 340))
+        constant = 3.53939
+        coefficient = 0.879545
+    elsif((getWeight >= 340) && (getWeight < 350))
+        constant = 3.8324
+        coefficient = 0.88007
+    elsif((getWeight >= 350) && (getWeight < 360))
+        constant = 4.19697
+        coefficient = 0.879545
+    elsif((getWeight >= 360) && (getWeight < 370))
+        constant = 4.5303
+        coefficient = 0.879545
+    elsif((getWeight >= 370) && (getWeight < 380))
+        constant = -7.38083
+        coefficient = 1.04605
+    elsif((getWeight >= 380) && (getWeight < 390))
+        constant = 5.15198
+        coefficient = 0.88007
+    end
+
+    predictedFromBraWaist = (constant + (coefficient * getBraBust))
+
+    deltaWaist = (predictedFromHWWaist - predictedFromBraWaist).abs
+
+    if (getBodyShape == "Triangle")
+      predictedFromHWHip += deltaWaist
+    end
+
+    trueBust = (((predictedFromHWBust * 4) + (predictedFromBraBust * 6)) / 10)
+    trueWaist = (((predictedFromHWWaist * 4) + (predictedFromBraWaist * 6)) / 10)
+    trueHip = predictedFromHWHip
+
+    results_hash = {}
+    results_hash[:true_bust] = trueBust
+    results_hash[:true_waist] = trueWaist
+    results_hash[:true_hip] = trueHip
 
     return results_hash
   end
@@ -717,30 +843,117 @@ class User < ApplicationRecord
     end
     # getBraBust = user.bust #(bra size)
 
-    if (getHeight >= 48) && (getHeight <=59)
-      predictedBust = 40
-      predictedWaist = 46
-      predictedHip = 50
-      predictedInseam = 0
-
-    elsif (getHeight >= 60) && (getHeight <=71)
-      predictedBust = 40
-      predictedWaist = 46
-      predictedHip = 50
-      predictedInseam = 0
-
-    elsif (getHeight >= 72) && (getHeight <=80)
-      predictedBust = 40
-      predictedWaist = 46
-      predictedHip = 50
-      predictedInseam = 0
+    if ((getHeight >= 48) && (getHeight <= 59))
+        predictedBust = (39.8264 + (getHeight * (-0.302730)) + (getWeight * 0.120800))
+        predictedWaist = (35.8677 + (getHeight * (-0.384542)) + (getWeight * 0.138296))
+        predictedHip = (33.4821 + (getHeight * (-0.166397)) + (getWeight * 0.118986))
+        predictedInseam = (-7.39781 + (getHeight * 0.602135)) + (getWeight * (-0.0133127))
+    elsif ((getHeight >= 60) && (getHeight <=71))
+        predictedBust = (39.8602 + (getHeight * (-0.303865)) + (getWeight * 0.120917))
+        predictedWaist = (60.0865 + (getHeight * (-0.763514)) + (getWeight * 0.141982))
+        predictedHip = (33.3585 + (getHeight * (-0.162360)) + (getWeight * 0.118724))
+        predictedInseam = (-7.85941 + (getHeight * 0.608293)) + (getWeight * (-0.0128906))
+    elsif ((getHeight >= 72) && (getHeight <=80))
+        predictedBust = (39.7441 + (getHeight * (-0.302251)) + (getWeight * 0.120945))
+        predictedWaist = (39.4437 + (getHeight * (-0.446287)) + (getWeight * 0.139020))
+        predictedHip = (33.0163 + (getHeight * (-0.160000)) + (getWeight * 0.119220))
+        predictedInseam = (-10.1759 + (getHeight * 0.636287)) + (getWeight * (-0.0117900))
     end
 
     getBraBust = user.bra_size.to_f + (['AA', 'A', 'B', 'C', 'D', 'DD or E', 'DDD or F', 'G', 'H', 'I', 'J'].find_index(user.bra_cup))
 
-    trueBust = ((predictedBust.to_f + averageBust + getBraBust) / 3)
-    trueWaist = ((predictedWaist.to_f + averageWaist) / 2)
-    trueHip = ((predictedHip.to_f + averageHip) / 2)
+    constant = 0
+    coefficient = 0
+
+    #Set Coefficient and Constant
+    if((getWeight >= 140) && (getWeight < 150))
+        constant = -2.75
+        coefficient = 0.880769
+    elsif((getWeight >= 150) && (getWeight < 160))
+        constant = -2.36061
+        coefficient = 0.879545
+    elsif((getWeight >= 160) && (getWeight < 170))
+        constant = -2.04394
+        coefficient = 0.879545
+    elsif((getWeight >= 170) && (getWeight < 180))
+        constant = -1.67552
+        coefficient = 0.878671
+    elsif((getWeight >= 180) && (getWeight < 190))
+        constant = -1.39953
+        coefficient = 0.88007
+    elsif((getWeight >= 190) && (getWeight < 200))
+        constant = -1.06212
+        coefficient = 0.879545
+    elsif((getWeight >= 200) && (getWeight < 210))
+        constant = -0.721212
+        coefficient = 0.879545
+    elsif((getWeight >= 210) && (getWeight < 220))
+        constant = -7.38083
+        coefficient = 1.04605
+    elsif((getWeight >= 220) && (getWeight < 230))
+        constant = 0.00198135
+        coefficient = 0.877972
+    elsif((getWeight >= 230) && (getWeight < 240))
+        constant = 0.259907
+        coefficient = 0.88007
+    elsif((getWeight >= 240) && (getWeight < 250))
+        constant = 0.559907
+        coefficient = 0.88007
+    elsif((getWeight >= 250) && (getWeight < 260))
+        constant = 0.98951
+        coefficient = 0.878147
+    elsif((getWeight >= 260) && (getWeight < 270))
+        constant = 1.18077
+        coefficient = 0.880769
+    elsif((getWeight >= 270) && (getWeight < 280))
+        constant = 1.53963
+        coefficient = 0.88007
+    elsif((getWeight >= 280) && (getWeight < 290))
+        constant = 1.97692
+        coefficient = 0.878147
+    elsif((getWeight >= 290) && (getWeight < 300))
+        constant = 2.15769
+        coefficient = 0.880769
+    elsif((getWeight >= 300) && (getWeight < 310))
+        constant = 2.55758
+        coefficient = 0.879545
+    elsif((getWeight >= 310) && (getWeight < 320))
+        constant = 2.85268
+        coefficient = 0.88007
+    elsif((getWeight >= 320) && (getWeight < 330))
+        constant = 3.25641
+        coefficient = 0.878846
+    elsif((getWeight >= 330) && (getWeight < 340))
+        constant = 3.53939
+        coefficient = 0.879545
+    elsif((getWeight >= 340) && (getWeight < 350))
+        constant = 3.8324
+        coefficient = 0.88007
+    elsif((getWeight >= 350) && (getWeight < 360))
+        constant = 4.19697
+        coefficient = 0.879545
+    elsif((getWeight >= 360) && (getWeight < 370))
+        constant = 4.5303
+        coefficient = 0.879545
+    elsif((getWeight >= 370) && (getWeight < 380))
+        constant = -7.38083
+        coefficient = 1.04605
+    elsif((getWeight >= 380) && (getWeight < 390))
+        constant = 5.15198
+        coefficient = 0.88007
+    end
+
+    predictedFromBraWaist = (constant + (coefficient * getBraBust))
+
+    deltaWaist = (predictedFromHWWaist - predictedFromBraWaist).abs
+
+    if (getBodyShape == "Triangle")
+      predictedFromHWHip += deltaWaist
+    end
+
+    trueBust = (((predictedFromHWBust * 4) + (predictedFromBraBust * 6)) / 10)
+    trueWaist = (((predictedFromHWWaist * 4) + (predictedFromBraWaist * 6)) / 10)
+    trueHip = predictedFromHWHip
 
     results_hash = {}
     results_hash[:true_bust] = trueBust
@@ -764,23 +977,21 @@ class User < ApplicationRecord
     end
     # getBraBust = user.bust #(bra size)
 
-    if (getHeight >= 48) && (getHeight <=59)
-      predictedBust = 40
-      predictedWaist = 46
-      predictedHip = 50
-      predictedInseam = 0
-
-    elsif (getHeight >= 60) && (getHeight <=71)
-      predictedBust = 40
-      predictedWaist = 46
-      predictedHip = 50
-      predictedInseam = 0
-
-    elsif (getHeight >= 72) && (getHeight <=80)
-      predictedBust = 40
-      predictedWaist = 46
-      predictedHip = 50
-      predictedInseam = 0
+    if ((getHeight >= 48) && (getHeight <= 59))
+        predictedBust = (39.8264 + (getHeight * (-0.302730)) + (getWeight * 0.120800))
+        predictedWaist = (35.8677 + (getHeight * (-0.384542)) + (getWeight * 0.138296))
+        predictedHip = (33.4821 + (getHeight * (-0.166397)) + (getWeight * 0.118986))
+        predictedInseam = (-7.39781 + (getHeight * 0.602135)) + (getWeight * (-0.0133127))
+    elsif ((getHeight >= 60) && (getHeight <=71))
+        predictedBust = (39.8602 + (getHeight * (-0.303865)) + (getWeight * 0.120917))
+        predictedWaist = (60.0865 + (getHeight * (-0.763514)) + (getWeight * 0.141982))
+        predictedHip = (33.3585 + (getHeight * (-0.162360)) + (getWeight * 0.118724))
+        predictedInseam = (-7.85941 + (getHeight * 0.608293)) + (getWeight * (-0.0128906))
+    elsif ((getHeight >= 72) && (getHeight <=80))
+        predictedBust = (39.7441 + (getHeight * (-0.302251)) + (getWeight * 0.120945))
+        predictedWaist = (39.4437 + (getHeight * (-0.446287)) + (getWeight * 0.139020))
+        predictedHip = (33.0163 + (getHeight * (-0.160000)) + (getWeight * 0.119220))
+        predictedInseam = (-10.1759 + (getHeight * 0.636287)) + (getWeight * (-0.0117900))
     end
 
     #Variable Instantiation
@@ -1071,53 +1282,6 @@ class User < ApplicationRecord
     results_hash[:true_bust] = trueBust
     results_hash[:true_waist] = trueWaist
     results_hash[:true_hip] = trueHip
-    return results_hash
-  end
-
-  def calcFromHeightWeightBra(user) #priority 2
-    getBraBust = user.bra_size.to_f + (['AA', 'A', 'B', 'C', 'D', 'DD or E', 'DDD or F', 'G', 'H', 'I', 'J'].find_index(user.bra_cup))
-
-    if user.height_cm
-      getHeight = (user.height_cm.to_f) * 0.393701
-    elsif user.height_ft
-      getHeight = (user.height_ft.to_f * 12) + user.height_in.to_f
-    end
-
-    if user.weight_type == "Lbs"
-      getWeight = user.weight.to_f
-    elsif user.weight_type == "Kg"
-      getWeight = ((user.weight.to_f) * 2.20462)
-    end
-    # getBraBust = user.bust #(bra size)
-
-    if (getHeight >= 48) && (getHeight <=59)
-      predictedBust = 40
-      predictedWaist = 46
-      predictedHip = 50
-      predictedInseam = 0
-
-    elsif (getHeight >= 60) && (getHeight <=71)
-      predictedBust = 40
-      predictedWaist = 46
-      predictedHip = 50
-      predictedInseam = 0
-
-    elsif (getHeight >= 72) && (getHeight <=80)
-      predictedBust = 40
-      predictedWaist = 46
-      predictedHip = 50
-      predictedInseam = 0
-    end
-
-    trueBust = (predictedBust.to_f + getBraBust) / 2
-    trueWaist = predictedWaist
-    trueHip = predictedHip
-
-    results_hash = {}
-    results_hash[:true_bust] = trueBust
-    results_hash[:true_waist] = trueWaist
-    results_hash[:true_hip] = trueHip
-
     return results_hash
   end
 

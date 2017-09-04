@@ -380,6 +380,10 @@ $(document).ready(function() {
     if($('.cart-text').size() > 0){
       $('.cart-text').remove();
     }
+
+    if($('.cartshowpage').size() > 0){
+      $('#order_item_size, #order_item_color').css('border', 'none');
+    }
   })
 
   if($('.cartshowpage').size() > 0){

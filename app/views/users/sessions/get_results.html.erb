@@ -4,6 +4,8 @@
     <% @results[:product_results].each do |product| %>
       <%= link_to product_path(product) do%>
         <div class="prod-container">
+          <div class="index-add-to-cart"></div>
+          <button onclick="window.location.href='/products/'+'<%= product.id %>'" id="index-button">Add to Cart</button>
           <%= image_tag(product.picture_src, height: 500, width: 350, class: 'prod-img') %><br><br>
           <%= product.name.upcase %> by Voluptuous <br>
           <span class="price-before"><%= product.pricebefore %></span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;

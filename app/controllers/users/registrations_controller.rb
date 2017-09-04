@@ -115,7 +115,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         predictions = User.calcFromStoresAndSizes(current_user)
       end
 
-      current_user.update_attributes(predicted_bust: predictions[:true_bust], predicted_waist: predictions[:true_waist], predicted_hip: predictions[:true_hip])
+      current_user.update_attributes(predicted_bust: predictions[:true_bust], predicted_waist: predictions[:true_waist], predicted_hip: predictions[:true_hip], predicted_inseam: predictions[:true_inseam])
 
       session[:user_signed_up?] = true
       redirect_to products_path
