@@ -381,4 +381,11 @@ $(document).ready(function() {
     $('#index-button').css('opacity', '1');
   })
 
+  $('body').delegate('.remove-item', 'click', function(){
+    if($('.cart-text').size() > 0){
+      $('.cart-text').remove();
+    }
+  })
+
+
   })
