@@ -8,8 +8,6 @@ $(document).ready(function() {
     return messages.scrollTop(messages.prop("scrollHeight"));
   };
 
-
-
   if ($('#current-user').size() > 0) {
     App.personal_chat = App.cable.subscriptions.create({
       channel: "NotificationsChannel"
@@ -28,9 +26,10 @@ $(document).ready(function() {
           $('#conversation-body').scrollTop($('#conversation-body').prop("scrollHeight"));
         }
         else {
-          var messager = $('<div>').addClass('messager').text('Chat ');
-          messager.append($('<span>').addClass('close-chat').text(' X'));
-          messager.append($('<span>').addClass('chat-content'));
+          var messager = $('<div>').addClass('messager').html(' &nbsp; Chat ');
+          $(messager).append($('<span>').addClass('close-chat').text(' X').css('float', 'right').css('margin-right', '4%'));
+          $(messager).append($('<span>').addClass('chat-content'));
+          $('body').append(messager);
 
           $.ajax({
             url: '/messages/new',
@@ -45,9 +44,8 @@ $(document).ready(function() {
             $('.sendmessage').removeClass('sendmessage');
             $('#conversation-body').scrollTop($('#conversation-body').prop("scrollHeight"));
           })
-
           $('.messager-insert').html(messager);
-          messager.show().animate({right:"0px"}).addClass('visible');
+          $(messager).show().animate({right:"0px"}).addClass('visible');
         }
       }
 
