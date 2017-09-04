@@ -70,8 +70,8 @@
   float: right;
   width: 20%;
   position: absolute;
-  bottom: -1%;
-  right: 5%;
+  bottom: 46%;
+  right: 0%;
 }
 
 .cart-show-shipping{
@@ -99,4 +99,9 @@
 
 .cart-show-checkout a{
   color: white;
+}
+
+.shipping-container{
+  position: relative;
+  overflow: hidden;
 }

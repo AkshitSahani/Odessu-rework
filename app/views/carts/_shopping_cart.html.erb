@@ -19,7 +19,7 @@
   <% end %>
 <% end %>
 <br>
-<div style="overflow: hidden, position: relative;">
+<div class="shipping-container">
   <div class="cart-show-shipping">
     <h4> Delivery Type</h4><br>
     <%= form_for current_order, url: update_delivery_type_path do |f| %>
@@ -49,6 +49,6 @@
       <span>Total: CAD <%= @charge %></span>
     </label>
   </div>
-
-  <span class="cartshowpage"></span>
 </div>
+
+<span class="cartshowpage"></span>
