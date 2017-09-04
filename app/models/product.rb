@@ -49,10 +49,10 @@ class Product < ApplicationRecord
 
   def self.youtube_embed(youtube_url)
     if youtube_url[/youtu\.be\/([^\?]*)/]
-      youtube_id = $1
+      youtube_id = 1
     else
       youtube_url[/^.*((v\/)|(embed\/)|(watch\?))\??v?=?([^\&\?]*).*/]
-      youtube_id = $5
+      youtube_id = 5
     end
 
     %Q{<iframe title="YouTube video player" width="450" height="300" src="http://www.youtube.com/embed/#{ youtube_id }" frameborder="0" allowfullscreen></iframe>}
@@ -204,7 +204,7 @@ class Product < ApplicationRecord
       if prod.tops != nil
         i = 0
         while i < topFilter.count
-          if prod.description1.include?(topFilter(i))
+          if prod.description1.include?(topFilter[i])
             filtered_products << prod
             break
           else
@@ -215,7 +215,7 @@ class Product < ApplicationRecord
       elsif prod.bottoms != nil
         k = 0
         while k < bottomFilter.count
-          if prod.description1.include?(bottomFilter(k))
+          if prod.description1.include?(bottomFilter[k])
             filtered_products << prod
             break
           else
