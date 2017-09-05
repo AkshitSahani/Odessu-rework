@@ -334,6 +334,7 @@ $(document).ready(function() {
         },
         dataType: 'json'
       }).done(function(data){
+        console.log(data);
         var j = 0;
         for (i=0; i < data['sizes'].length; i++){
           j++

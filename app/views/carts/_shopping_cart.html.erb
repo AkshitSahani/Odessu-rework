@@ -31,24 +31,25 @@
       <%= f.submit 'Checkout', class: 'cart-show-checkout' %>
       <% end %>
   </div>
-
-  <div class="cart-show-totalamount">
-    <% if flash[:error].present? %>
-    <div id="error_explanation">
-      <p><%= flash[:error] %></p>
+  <% if @order_items.count > 0 %>
+    <div class="cart-show-totalamount">
+      <% if flash[:error].present? %>
+      <div id="error_explanation">
+        <p><%= flash[:error] %></p>
+      </div>
+      <% end %>
+      <label class="amount">
+        <span>Amount: CAD <%= @amount %></span>
+      </label><br>
+      <label class="tax">
+        <span>Taxes (13%): CAD <%= @tax %></span>
+      </label><br>
+      <hr style="width: 100%; margin-left: 0;">
+      <label class="final-charge">
+        <span>Total: CAD <%= @charge %></span>
+      </label>
     </div>
-    <% end %>
-    <label class="amount">
-      <span>Amount: CAD <%= @amount %></span>
-    </label><br>
-    <label class="tax">
-      <span>Taxes (13%): CAD <%= @tax %></span>
-    </label><br>
-    <hr style="width: 100%; margin-left: 0;">
-    <label class="final-charge">
-      <span>Total: CAD <%= @charge %></span>
-    </label>
-  </div>
+  <% end %>
 </div>
 
 <span class="cartshowpage"></span>
