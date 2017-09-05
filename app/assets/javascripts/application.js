@@ -98,7 +98,8 @@ $(document).ready(function() {
         var link = $('<a>').attr('href', url);
         var filterResultContainer = $("<div>").addClass('prod-container');
         var addToCart = $('<div>').addClass('index-add-to-cart');
-        var indexButton = $('<button>').attr('onclick', "window.location.href='/products/'" + productId).attr('id', 'index-button').text('Add to Cart');
+        var href = window.location.href;
+        var indexButton = $('<button>').attr('onclick', "window.location.href=" + href + "/" + productId).attr('id', 'index-button').text('Add to Cart');
         var imgSrc = data[i]['picture_src']
         var resultImage = $("<img>").attr('src', imgSrc).attr('height', "500").attr('width', "350").addClass('prod-img');
         filterResultContainer.append(addToCart).append(indexButton).append(resultImage).append($('<br>')).append($('<br>'));
@@ -378,7 +379,8 @@ $(document).ready(function() {
           var link = $('<a>').attr('href', url);
           var filterResultContainer = $("<div>").addClass('prod-container');
           var addToCart = $('<div>').addClass('index-add-to-cart');
-          var indexButton = $('<button>').attr('onclick', "window.location.href='/products/'" + productId).attr('id', 'index-button').text('Add to Cart');
+          var href = window.location.href;
+          var indexButton = $('<button>').attr('onclick', "window.location.href=" + href + "/" + productId).attr('id', 'index-button').text('Add to Cart');
           var imgSrc = data[i]['picture_src']
           var resultImage = $("<img>").attr('src', imgSrc).attr('height', "500").attr('width', "350").addClass('prod-img');
           filterResultContainer.append(addToCart).append(indexButton).append(resultImage).append($('<br>')).append($('<br>'));
@@ -406,7 +408,8 @@ $(document).ready(function() {
           var link = $('<a>').attr('href', url);
           var filterResultContainer = $("<div>").addClass('prod-container');
           var addToCart = $('<div>').addClass('index-add-to-cart');
-          var indexButton = $('<button>').attr('onclick', "window.location.href='/products/'" + productId).attr('id', 'index-button').text('Add to Cart');
+          var href = window.location.href;
+          var indexButton = $('<button>').attr('onclick', "window.location.href=" + href + "/" + productId).attr('id', 'index-button').text('Add to Cart');
           var imgSrc = data[i]['picture_src']
           var resultImage = $("<img>").attr('src', imgSrc).attr('height', "500").attr('width', "350").addClass('prod-img');
           filterResultContainer.append(addToCart).append(indexButton).append(resultImage).append($('<br>')).append($('<br>'));
