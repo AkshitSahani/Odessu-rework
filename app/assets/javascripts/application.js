@@ -93,13 +93,13 @@ $(document).ready(function() {
     }).done(function(data){
       var results = $("<div>").addClass('index');
       for(i=0; i < data.length; i++){
+        var href = window.location.href;
         var productId = data[i]['id'];
-        var url = 'http://localhost:3000/products/' + productId;
+        var url = href + "/" + productId;
         var link = $('<a>').attr('href', url);
         var filterResultContainer = $("<div>").addClass('prod-container');
         var addToCart = $('<div>').addClass('index-add-to-cart');
-        var href = window.location.href;
-        var indexButton = $('<button>').attr('onclick', "window.location.href=" + href + "/" + productId).attr('id', 'index-button').text('Add to Cart');
+        var indexButton = $('<button>').attr('onclick', "window.location.href=" + url).attr('id', 'index-button').text('Add to Cart');
         var imgSrc = data[i]['picture_src']
         var resultImage = $("<img>").attr('src', imgSrc).attr('height', "500").attr('width', "350").addClass('prod-img');
         filterResultContainer.append(addToCart).append(indexButton).append(resultImage).append($('<br>')).append($('<br>'));
@@ -375,12 +375,12 @@ $(document).ready(function() {
         var results = $("<div>").addClass('index');
         for(i=0; i < data.length; i++){
           var productId = data[i]['id'];
-          var url = 'http://localhost:3000/products/' + productId;
+          var href = window.location.href;
+          var url = href + "/" + productId;
           var link = $('<a>').attr('href', url);
           var filterResultContainer = $("<div>").addClass('prod-container');
           var addToCart = $('<div>').addClass('index-add-to-cart');
-          var href = window.location.href;
-          var indexButton = $('<button>').attr('onclick', "window.location.href=" + href + "/" + productId).attr('id', 'index-button').text('Add to Cart');
+          var indexButton = $('<button>').attr('onclick', "window.location.href=" + url).attr('id', 'index-button').text('Add to Cart');
           var imgSrc = data[i]['picture_src']
           var resultImage = $("<img>").attr('src', imgSrc).attr('height', "500").attr('width', "350").addClass('prod-img');
           filterResultContainer.append(addToCart).append(indexButton).append(resultImage).append($('<br>')).append($('<br>'));
@@ -404,12 +404,12 @@ $(document).ready(function() {
         var results = $("<div>").addClass('index');
         for(i=0; i < data.length; i++){
           var productId = data[i]['id'];
-          var url = 'http://localhost:3000/products/' + productId;
+          var href = window.location.href;
+          var url = href + "/" + productId;
           var link = $('<a>').attr('href', url);
           var filterResultContainer = $("<div>").addClass('prod-container');
           var addToCart = $('<div>').addClass('index-add-to-cart');
-          var href = window.location.href;
-          var indexButton = $('<button>').attr('onclick', "window.location.href=" + href + "/" + productId).attr('id', 'index-button').text('Add to Cart');
+          var indexButton = $('<button>').attr('onclick', "window.location.href=" + url).attr('id', 'index-button').text('Add to Cart');
           var imgSrc = data[i]['picture_src']
           var resultImage = $("<img>").attr('src', imgSrc).attr('height', "500").attr('width', "350").addClass('prod-img');
           filterResultContainer.append(addToCart).append(indexButton).append(resultImage).append($('<br>')).append($('<br>'));
