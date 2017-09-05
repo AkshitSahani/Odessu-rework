@@ -43,37 +43,37 @@ $(document).ready(function() {
     })
   })
 
-  $(".button_submit").on("click", function(e) {
-    e.preventDefault();
-    var issuesTop = [];
-    var issuesBottom = [];
-    var insecuritiesTop = [];
-    var insecuritiesBottom = [];
-    $(':checkbox:checked').each(function(i){
-      if ($(this).attr('name')==="issue_top[]"){
-        issuesTop.push($(this).val());
-      }
-      else if ($(this).attr('name')==="issue_bottom[]"){
-        issuesBottom.push($(this).val());
-      }
-      else if ($(this).attr('name')==="insecurity_bottom[]"){
-        insecuritiesBottom.push($(this).val());
-      }
-      else if ($(this).attr('name')==="insecurity_top[]"){
-        insecuritiesTop.push($(this).val());
-      }
-    });
-    $.ajax({
-      url: '/update_issues',
-      method: 'put',
-      data: {
-        issues_top: issuesTop, issues_bottom: issuesBottom,
-        insecurities_top: insecuritiesTop, insecurities_bottom: insecuritiesBottom
-      }
-    }).done(function(){
-      $(".form1 > form").submit();
-    })
-  })
+  // $(".button_submit").on("click", function(e) {
+  //   e.preventDefault();
+  //   var issuesTop = [];
+  //   var issuesBottom = [];
+  //   var insecuritiesTop = [];
+  //   var insecuritiesBottom = [];
+  //   $(':checkbox:checked').each(function(i){
+  //     if ($(this).attr('name')==="issue_top[]"){
+  //       issuesTop.push($(this).val());
+  //     }
+  //     else if ($(this).attr('name')==="issue_bottom[]"){
+  //       issuesBottom.push($(this).val());
+  //     }
+  //     else if ($(this).attr('name')==="insecurity_bottom[]"){
+  //       insecuritiesBottom.push($(this).val());
+  //     }
+  //     else if ($(this).attr('name')==="insecurity_top[]"){
+  //       insecuritiesTop.push($(this).val());
+  //     }
+  //   });
+  //   $.ajax({
+  //     url: '/update_issues',
+  //     method: 'put',
+  //     data: {
+  //       issues_top: issuesTop, issues_bottom: issuesBottom,
+  //       insecurities_top: insecuritiesTop, insecurities_bottom: insecuritiesBottom
+  //     }
+  //   }).done(function(){
+  //     $(".form1 > form").submit();
+  //   })
+  // })
 
   var allItems = $('.filters-container > h4')[3];
   $(allItems).css('color', 'red').css('text-decoration', 'underline');

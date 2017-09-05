@@ -178,8 +178,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   def edit_profile
-    @issues_top = current_user.issues.where(issue_bottom: nil)
-    @issues_bottom = current_user.issues.where(issue_top: nil)
     @showoffs = current_user.showoffs
     @stores = (["Select a store"] << Store.all.distinct.order(:store_name).pluck(:store_name)).flatten
   end
